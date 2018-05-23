@@ -1,0 +1,59 @@
+# Shows the time that takes to ls a repository
+mounttime value:GAUGE:0:u
+
+# Shows the memory consumed by the cvmfs process
+memory rss:GAUGE:0:u vms:GAUGE:0:u
+
+# Attributes
+# http://cvmfs.readthedocs.io/en/stable/cpt-details.html#getxattr
+
+# Shows the remaining life time of the mounted root file catalog in minutes.
+expires value:GAUGE:0:u
+
+# Like timeout but for the host settings to fetch external files.
+external_timeout value:GAUGE:0:u
+
+# Shows the highest possible inode with the current set of loaded catalogs.
+inode_max value:GAUGE:0:u
+
+# Shows the maximum number of file descriptors available to file system clients.
+maxfd value:GAUGE:0:u
+
+# Shows the number of cache cleanups in the last 24 hours.
+ncleanup24 value:GAUGE:0:u
+
+# Shows the number of currently loaded nested catalogs.
+nclg value:GAUGE:0:u
+
+# Shows the overall number of opened directories.
+ndiropen value:GAUGE:0:u
+
+# Shows the overall number of downloaded files since mounting.
+ndownload value:GAUGE:0:u
+
+# Shows the total number of I/O errors encoutered since mounting.
+nioerr value:GAUGE:0:u
+
+# Shows the overall number of open() calls since mounting.
+nopen value:GAUGE:0:u
+
+# Shows the file catalog revision of the mounted root catalog, an auto-increment counter increased on every repository publish.
+revision value:GAUGE:0:u
+
+# Shows the overall amount of downloaded kilobytes.
+rx value:GAUGE:0:u
+
+# Shows the average download speed.
+speed value:GAUGE:0:u
+
+# Shows the timeout for proxied connections in seconds.
+timeout value:GAUGE:0:u
+
+# Shows the timeout for direct connections in seconds.
+timeout_direct  value:GAUGE:0:u
+
+# Shows the time passed since mounting in minutes.
+uptime value:GAUGE:0:u
+
+# Shows the number of file descriptors currently issued to file system clients.
+usedfd value:GAUGE:0:u
