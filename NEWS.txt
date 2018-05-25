@@ -1,5 +1,12 @@
 News
 ====
+1.0.2
+-----
+
+*Release date: 25-May-207
+
+* Correct name of type database.
+
 1.0.1
 -----
 
