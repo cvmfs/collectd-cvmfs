@@ -1,9 +1,10 @@
 News
 ====
-0.1
----
+1.0.1
+-----
 
-*Release date: 15-Mar-2010*
+*Release date: 25-May-207
 
-* Example news entry for a released version
+* First release
+
 
