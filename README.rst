@@ -8,9 +8,9 @@ Example::
 
     <Plugin "python">
 
-      Import "collectdcvmfs"
+      Import "collectd_cvmfs"
 
-      <Module "collectdcvmfs">
+      <Module "collectd_cvmfs">
         Repo "alice.cern.ch" "atlas.cern.ch"
         Repo "ams.cern.ch"
 
@@ -29,7 +29,7 @@ Example::
 * ``Repo``: cvmfs repository to monitor.
 * ``MountTime``: boolean value to specify whether mount time should be reported or not.
 * ``Memory``: boolean value to specify whether the memory footprint should be reported or not.
-* ``Attribute``: attribute to monitor on the given repositories. You can get the list from of valid attributes from the type db in ``resources/collectdcvmfs.db``.
+* ``Attribute``: attribute to monitor on the given repositories. You can get the list from of valid attributes from the type db in ``resources/collectd_cvmfs.db``.
 * ``Interval``: interval in seconds to probe the CVMFS repositories.
 
 Metrics

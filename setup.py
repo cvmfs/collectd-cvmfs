@@ -13,7 +13,7 @@ install_requires = [
 ]
 
 
-setup(name='collectdcvmfs',
+setup(name='collectd_cvmfs',
     version=version,
     description="Collectd Plugin to Monitor CvmFS Clients",
     long_description=README + '\n\n' + NEWS,
@@ -32,7 +32,7 @@ setup(name='collectdcvmfs',
     license='Apache II',
     packages=find_packages('src'),
     package_dir = {'': 'src'},
-    data_files = [('/usr/share/collectd/', ['resources/collectdcvmfs.db'])],
+    data_files = [('/usr/share/collectd/', ['resources/collectd_cvmfs.db'])],
     include_package_data=True,
     zip_safe=False,
     install_requires=install_requires
