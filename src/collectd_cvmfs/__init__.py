@@ -8,6 +8,10 @@ import time
 CVMFS_ROOT = '/cvmfs'
 PLUGIN_NAME = 'cvmfs'
 
+CONFIG_DEFAULT_REPOS = []
+CONFIG_DEFAULT_ATTRIBUTES = []
+CONFIG_DEFAULT_MEMORY = True
+CONFIG_DEFAULT_MOUNTTIME = True
 
 def read_mounttime(repo_mountpoint):
     start = time.time()
@@ -55,10 +59,10 @@ def str2bool(boolstr):
 
 def configure(conf):
     global REPOS, ATTRIBUTES, MEMORY, MOUNTTIME
-    REPOS = []
-    ATTRIBUTES = []
-    MEMORY = True
-    MOUNTTIME = True
+    REPOS = CONFIG_DEFAULT_REPOS
+    ATTRIBUTES = CONFIG_DEFAULT_ATTRIBUTES
+    MEMORY = CONFIG_DEFAULT_MEMORY
+    MOUNTTIME = CONFIG_DEFAULT_MOUNTTIME
     for node in conf.children:
         key = node.key.lower()
         if key == 'repo':
