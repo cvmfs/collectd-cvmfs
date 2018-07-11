@@ -5,6 +5,7 @@ Configuration
 -------------
 
 Example::
+    TypesDB "/usr/share/collectd/collectd_cvmfs.db"
 
     <Plugin "python">
 
@@ -25,7 +26,7 @@ Example::
 
     </Plugin>
 
-
+* ``TypesDB``: types used by the plugin and shipped with the package. 
 * ``Repo``: cvmfs repository to monitor.
 * ``MountTime``: boolean value to specify whether mount time should be reported or not.
 * ``Memory``: boolean value to specify whether the memory footprint should be reported or not.
