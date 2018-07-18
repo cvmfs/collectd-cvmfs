@@ -6,6 +6,9 @@ To create a buildout,
   $ python bootstrap.py
   $ bin/buildout
 
+When running tox, some of the dependencies for the virtual environment require Development
+packages to compile the python packages.
+
 Release HOWTO
 =============
 
