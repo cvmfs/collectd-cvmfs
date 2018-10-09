@@ -21,6 +21,8 @@ Example::
         Attribute ndownload nioerr
         Attribute usedfd
 
+        Verbose False
+
         Interval "300"
       </Module>
 
@@ -32,6 +34,9 @@ Example::
 * ``Memory``: boolean value to specify whether the memory footprint should be reported or not.
 * ``Attribute``: attribute to monitor on the given repositories. You can get the list from of valid attributes from the type db in ``resources/collectd_cvmfs.db``.
 * ``Interval``: interval in seconds to probe the CVMFS repositories.
+* ``Verbose``: boolean value to produce logs more verbosed in collectd. It is false by default.
+
+The plugin allows multiple instances for different configurations. This allows probing different repos at different intervals or probing different attributes depending on the repository.
 
 Metrics
 -------
