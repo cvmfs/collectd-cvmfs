@@ -1,16 +1,26 @@
 News
 ====
+1.0.3
+-----
+
+* Release date: 18-Oct-2017
+
+* Make collectd aware of explicit interval so
+  that it does not flush the value to soon.
+
+* Documentation about TypesDB file.
+
 1.0.2
 -----
 
-*Release date: 25-May-207
+*Release date: 25-May-2017
 
 * Correct name of type database.
 
 1.0.1
 -----
 
-*Release date: 25-May-207
+*Release date: 25-May-2017
 
 * First release
 
