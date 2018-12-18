@@ -9,7 +9,8 @@ version = '1.1.0'
 
 install_requires = [
     'xattr',
-    'psutil'
+    'psutil',
+    'scandir;python_version<"3.5"'
 ]
 
 

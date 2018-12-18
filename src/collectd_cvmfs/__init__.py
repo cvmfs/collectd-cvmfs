@@ -2,8 +2,14 @@ import collectd
 import xattr
 import os
 import psutil
+import threading
 import time
 import uuid
+
+try:
+    from os import scandir
+except ImportError:
+    from scandir import scandir
 
 CVMFS_ROOT = '/cvmfs'
 PLUGIN_NAME = 'cvmfs'
@@ -11,6 +17,7 @@ PLUGIN_NAME = 'cvmfs'
 CONFIG_DEFAULT_MEMORY = True
 CONFIG_DEFAULT_MOUNTTIME = True
 CONFIG_DEFAULT_INTERVAL = -1
+CONFIG_DEFAULT_MOUNTTIMEOUT = 5
 
 class CvmfsProbeConfig(object):
     def __init__(self):
@@ -18,6 +25,7 @@ class CvmfsProbeConfig(object):
         self.attributes = []
         self.memory = CONFIG_DEFAULT_MEMORY
         self.mounttime = CONFIG_DEFAULT_MOUNTTIME
+        self.mounttimeout = CONFIG_DEFAULT_MOUNTTIMEOUT
         self.interval = CONFIG_DEFAULT_INTERVAL
         self.config_name = uuid.uuid4().hex
         self.verbose = False
@@ -33,16 +41,30 @@ class CvmfsProbeConfig(object):
             self.verbose
         )
 
+
 class CvmfsProbe(object):
     def debug(self, msg, verbose=False):
         if verbose:
             collectd.info('{0} plugin: {1}'.format(PLUGIN_NAME, msg))
 
-    def read_mounttime(self, repo_mountpoint):
+
+    def safe_scandir(self, directory, timeout):
+        contents = []
+        t = threading.Thread(target=lambda: contents.extend(scandir(directory)))
+        t.daemon = True
+        t.start()
+        t.join(timeout)
+        if t.is_alive():
+            raise Exception("Scandir timed out after {0} seconds".format(timeout))
+        return contents
+
+
+    def read_mounttime(self, repo_mountpoint, timeout):
         start = time.time()
-        os.listdir(repo_mountpoint)
+        self.safe_scandir(repo_mountpoint, timeout)
         end = time.time()
         return end - start
+
 
     def read(self, config):
         self.debug("probing config: {0}".format((config)), config.verbose)
@@ -52,11 +74,14 @@ class CvmfsProbe(object):
             val.interval = config.interval
             repo_mountpoint = os.path.join(CVMFS_ROOT, repo)
 
-            if config.mounttime:
-                try:
-                    val.dispatch(type='mounttime', values=[self.read_mounttime(repo_mountpoint)], interval=config.interval)
-                except Exception:
-                    collectd.warning('cvmfs: failed to get MountTime for repo %s' % repo)
+            try:
+                mounttime = self.read_mounttime(repo_mountpoint, config.mounttimeout)
+                if config.mounttime:
+                    val.dispatch(type='mounttime', values=[mounttime], interval=config.interval)
+                    val.dispatch(type='mountok', values=[1], interval=config.interval)
+            except Exception as e:
+                collectd.warning('cvmfs: failed to get MountTime for repo %s: %s' % (repo, e))
+                val.dispatch(type='mountok', values=[0], interval=config.interval)
 
             if config.memory:
                 try:
@@ -73,6 +98,7 @@ class CvmfsProbe(object):
                     val.dispatch(type=attribute, values=[float(xattr.getxattr(repo_mountpoint, attribute_name))], interval=config.interval)
                 except Exception:
                     collectd.warning('cvmfs: failed to inspect attribute "%s" in  repo "%s"' % (attribute_name, repo_mountpoint))
+
 
     def str2bool(self, boolstr):
         if boolstr.lower() == 'true':
@@ -101,6 +127,8 @@ class CvmfsProbe(object):
                     config.mounttime = self.str2bool(node.values[0])
                 except:
                     collectd.info("cvmfs: MountTime value %s is not valid. It must be either True or False" % (node.values[0]))
+            elif key == 'mounttimeout':
+                config.mounttimeout = int(node.values[0])
             elif key == 'interval':
                 config.interval = int(node.values[0])
             elif key == 'verbose':
