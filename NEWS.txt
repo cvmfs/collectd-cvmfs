@@ -1,5 +1,11 @@
 News
 ====
+1.1.0
+-----
+* Release date: 13-May-2019
+
+* remove memory type definition
+
 1.0.3
 -----
 
