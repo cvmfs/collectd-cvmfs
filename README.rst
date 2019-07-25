@@ -5,31 +5,24 @@ Configuration
 -------------
 
 Example::
+
     TypesDB "/usr/share/collectd/collectd_cvmfs.db"
-
     <Plugin "python">
-
       Import "collectd_cvmfs"
-
       <Module "collectd_cvmfs">
         Repo "alice.cern.ch" "atlas.cern.ch"
         Repo "ams.cern.ch"
-
         MountTime True
         MountTimeout 10
         Memory True
-
         Attribute ndownload nioerr
         Attribute usedfd
-
         Verbose False
-
         Interval "300"
       </Module>
-
     </Plugin>
 
-* ``TypesDB``: types used by the plugin and shipped with the package. 
+* ``TypesDB``: types used by the plugin and shipped with the package.
 * ``Repo``: cvmfs repository to monitor.
 * ``MountTime``: boolean value to specify whether mount time should be reported or not.
 * ``MountTimeout``: timeout in seconds while trying to mount the repositories.
@@ -48,7 +41,7 @@ The metrics are published in the following structure::
     Plugin: cvmfs
     PluginInstance: <repo>
     Type: {<Attribute>|MountTime|Memory|Mountok}
-    
+
     # Only with Memory:
     TypeInstance: [rss|vms]
 
