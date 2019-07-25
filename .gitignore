@@ -9,6 +9,5 @@ develop-eggs
 tmp
 build
 dist
-
 .pytest_cache
 .tox
