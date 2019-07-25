@@ -1,5 +1,10 @@
 News
 ====
+1.2.0
+* Release date: 25-Jul-2019
+* New metric MountOK with value 0 (no) 1 (yes)
+* Mounts now use scandir to avoid hanging.
+
 1.1.0
 -----
 * Release date: 13-May-2019
