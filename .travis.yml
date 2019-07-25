@@ -1,0 +1,14 @@
+sudo: false
+language: python
+python:
+- 2.7
+- 3.6
+script: python -m compileall src/
+deploy:
+  provider: pypi
+  on:
+    tags: true
+    all_branches: true
+  user: traylenator
+  password:
+    secure: CxVDmZbV5Am4LjvSLlPitR8deZVL+BzedxjtNkmwhli7ycJc9rDg5nrR3U0LXrKO4j08mk3Wb19O6QR4+M2vn2l32HAMTgdH9V4pyX2asOgV44AkMWFyW8NqemZskYhXV4dtbZuSQ+unu6F4ugx2ns5bhdbwiNJW0fJDZB4Aj4BfbvNKKvpGcMzIn4X0QJlSKpQXp9z4O7kzsIfGKWIhwkJyYnBHN6755lRQvTWBy4h+NvqRqDpTJxhe2zUjVso/Xd3LJwCxKWVSK5vizJBqEEHVCPYAkdgS2Lu8v9/2usos9r/94fFcgMXE2D202wEAGruC3/QR/5GCjbL5CJDTZmTP0LvDsBsVVwZWIFVHAZduUcaGL5CA6bOwiAwjhfq32ZFn/XYQCYvSz7qCxW25XFeRd1NUNflstKV6l4aPoWfrg7rtPlRVmnX1a8PPJMkV/UFS1KRer0YWQl51mwUn6mhIZ7EPe3jlGlyCQdhTpYk26FovZ135CJLYHWBVW/risWmGMNCOmFPro8OSd9YTOmk6qRDS3Q5DeGZw1cgrlVctZ5l9gUtDJ23BwaMNab8JWxs3FXPq4j1jybJiAlSj65ErN3eI+lRicB/PyAWae9OX0tPKIJqJzspl3rVjlrbGl35WK/Wdt20C04RC9+N4I2NJX0jsbEHmtwBiAcq4f0c=
