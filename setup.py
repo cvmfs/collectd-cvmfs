@@ -5,7 +5,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.rst')).read()
 NEWS = open(os.path.join(here, 'NEWS.txt')).read()
 
-version = '1.2.0'
+version = '1.2.1'
 
 install_requires = [
     'xattr',
@@ -18,7 +18,6 @@ setup(name='collectd_cvmfs',
     version=version,
     description="Collectd Plugin to Monitor CvmFS Clients",
     long_description=README + '\n\n' + NEWS,
-    long_description_content_type="text/x-rst",
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: System Administrators",
