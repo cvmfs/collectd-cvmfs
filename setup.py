@@ -8,7 +8,7 @@ NEWS = open(os.path.join(here, 'NEWS.txt')).read()
 version = '1.2.2'
 
 install_requires = [
-    'xattr',
+    'pyxattr',
     'psutil',
     'scandir;python_version<"3.5"'
 ]
