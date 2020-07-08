@@ -1,5 +1,11 @@
 News
 ====
+1.3.0
+* Release date: 8-Jul-2020
+* Success of mount now confirmed with
+  [ "x$(attr -qg fqrn /cvmfs/cms.cern.ch)" = "xcms.cern.ch" ]
+* Pip requirements corrected to require pyxattr and not xattr
+
 1.2.0
 * Release date: 25-Jul-2019
 * New metric MountOK with value 0 (no) 1 (yes)
