@@ -18,6 +18,7 @@ setup(name='collectd_cvmfs',
     version=version,
     description="Collectd Plugin to Monitor CvmFS Clients",
     long_description=README + '\n\n' + NEWS,
+    long_description_content_type='text/x-rst',
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: System Administrators",
