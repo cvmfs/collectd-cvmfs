@@ -63,7 +63,12 @@ class CvmfsProbe(object):
         start = time.time()
         self.safe_scandir(repo_mountpoint, timeout)
         end = time.time()
-        return end - start
+        # Did we really mount it ?
+        try:
+          xattr.getxattr(repo_mountpoint, 'user.fqrn') == repo_mountpoint
+          return end - start
+        except:
+          raise Exception("Repository was not mounted correctly")
 
 
     def read(self, config):
