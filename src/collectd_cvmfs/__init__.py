@@ -70,6 +70,13 @@ class CvmfsProbe(object):
         except:
           raise Exception("Repository was not mounted correctly")
 
+    def read_memory(self, repo_mountpoint):
+        repo_pid = int(xattr.getxattr(repo_mountpoint, 'user.pid'))
+        process = psutil.Process(repo_pid)
+        if callable(getattr(process, "get_memory_info", None)):
+            return process.get_memory_info()
+        else:
+            return process.memory_info()
 
     def read(self, config):
         self.debug("probing config: {0}".format((config)), config.verbose)
@@ -90,8 +97,7 @@ class CvmfsProbe(object):
 
             if config.memory:
                 try:
-                    repo_pid = int(xattr.getxattr(repo_mountpoint, 'user.pid'))
-                    repo_mem = psutil.Process(repo_pid).get_memory_info()
+                    repo_mem = self.read_memory(repo_mountpoint)
                     val.dispatch(type='memory', type_instance='rss', values=[repo_mem.rss], interval=config.interval)
                     val.dispatch(type='memory', type_instance='vms', values=[repo_mem.vms], interval=config.interval)
                 except Exception:
