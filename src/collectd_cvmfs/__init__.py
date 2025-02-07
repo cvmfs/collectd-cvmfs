@@ -94,6 +94,7 @@ class CvmfsProbe(object):
             except Exception as e:
                 collectd.warning('cvmfs: failed to get MountTime for repo %s: %s' % (repo, e))
                 val.dispatch(type='mountok', values=[0], interval=config.interval)
+                continue
 
             if config.memory:
                 try:
@@ -102,6 +103,9 @@ class CvmfsProbe(object):
                     val.dispatch(type='memory', type_instance='vms', values=[repo_mem.vms], interval=config.interval)
                 except Exception:
                     collectd.warning('cvmfs: failed to get Memory for repo %s' % repo)
+                    val.dispatch(type='memory', type_instance='rss', values=[0], interval=config.interval)
+                    val.dispatch(type='memory', type_instance='vms', values=[0], interval=config.interval)
+                    continue
 
             for attribute in config.attributes:
                 attribute_name = "user.%s" % attribute
