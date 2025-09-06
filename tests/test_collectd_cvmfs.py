@@ -1,7 +1,7 @@
 import sys
 
 import pytest
-from mock import MagicMock, Mock, mock_open, patch
+from unittest.mock import MagicMock, Mock, mock_open, patch
 
 configure_data = [
     (["ams.cern.ch"], ["nioerr"], True, True, 30, 200),
